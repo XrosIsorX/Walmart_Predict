@@ -1,11 +1,11 @@
 import numpy as np
-from keras.utils import to_categorical
 import matplotlib as plt
 import pandas as pd
 
 data = pd.read_csv("data/merged_train.csv")
-train_x = data.drop('Weekly_Sales', 1)
 train_y = data['Weekly_Sales']
+train_x = data.drop('Weekly_Sales', 1)
+
 
 from sklearn.model_selection import train_test_split
 train_x, valid_x, train_y, valid_y = train_test_split(train_x, train_y, test_size=0.2, random_state=14)
@@ -21,9 +21,9 @@ epochs = 100
 
 #Add network
 model = Sequential()
-model.add(Dense(10, activation='linear'))
+model.add(Dense(20 ,input_shape=(140,), activation='linear'))
 model.add(LeakyReLU(alpha=0.0))
-model.add(Dense(5, activation='linear'))
+model.add(Dense(10, activation='linear'))
 model.add(LeakyReLU(alpha=0.0))
 model.add(Dense(1, activation='linear'))
 
@@ -33,4 +33,4 @@ model.summary()
 
 #Train network
 model_train = model.fit(train_x, train_y, batch_size=batch_size,epochs=epochs,verbose=1,validation_data=(valid_x, valid_y))
-model.save("fashion_model.h5py")
+model.save("model.h5py")
