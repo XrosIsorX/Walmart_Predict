@@ -17,19 +17,18 @@ from keras.layers.normalization import BatchNormalization
 from keras.layers.advanced_activations import LeakyReLU
 
 batch_size = 64
-epochs = 10
+epochs = 20
 
 #Add network
 model = Sequential()
-model.add(Dense(100 ,input_shape=(140,), activation='linear'))
-model.add(LeakyReLU(alpha=0.0))
-model.add(Dense(50, activation='linear'))
-model.add(LeakyReLU(alpha=0.0))
-model.add(Dense(10, activation='linear'))
-model.add(LeakyReLU(alpha=0.0))
+model.add(Dense(100 ,input_shape=(train_x.shape[1],), activation='linear'))
+model.add(Dense(100, activation='linear'))
+model.add(Dense(100, activation='linear'))
+model.add(Dense(100, activation='linear'))
+model.add(Dense(100, activation='linear'))
 model.add(Dense(1, activation='linear'))
 
-model.compile(loss=keras.losses.mean_absolute_error, optimizer=keras.optimizers.Adam(lr=0.01),metrics=['accuracy'])
+model.compile(loss=keras.losses.mean_absolute_error, optimizer=keras.optimizers.Adam(),metrics=['accuracy'])
 
 model.summary()
 
