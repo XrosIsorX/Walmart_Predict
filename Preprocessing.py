@@ -23,8 +23,9 @@ merged_test = merged_test.merge(merged_test.merge(features, how='left', sort=Fal
 merged_test['Month'] = merged_test.apply(add_month_col, axis=1)
 merged_test[['CPI','Unemployment']] = merged_test[['CPI','Unemployment']].fillna(method='ffill')
 merged_test = merged_test.fillna(0.)
-merged_test['Month'] = merged_test.apply(add_month_col, axis=1)
 merged_test = merged_test.drop('Date', 1)
 merged_test = pd.get_dummies(merged_test, columns=['Store', 'Dept', 'Type', 'Month'])
+merged_test['Month_8'] = 0
+merged_test['Month_9'] = 0
 merged_test.to_csv("data/merged_test.csv", index =False)
 

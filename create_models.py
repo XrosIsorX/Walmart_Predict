@@ -8,7 +8,7 @@ train_x = data.drop('Weekly_Sales', 1)
 
 
 from sklearn.model_selection import train_test_split
-train_x, valid_x, train_y, valid_y = train_test_split(train_x, train_y, test_size=0.2, random_state=14)
+train_x, valid_x, train_y, valid_y = train_test_split(train_x, train_y, test_size=0.1, random_state=14)
 
 import keras 
 from keras.models import Sequential, Input, Model
@@ -16,8 +16,8 @@ from keras.layers import Dense, Dropout
 from keras.layers.normalization import BatchNormalization
 from keras.layers.advanced_activations import LeakyReLU
 
-batch_size = 64
-epochs = 20
+batch_size = train_x.shape[0]
+epochs = 10000
 
 #Add network
 model = Sequential()
