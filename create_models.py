@@ -16,18 +16,20 @@ from keras.layers import Dense, Dropout
 from keras.layers.normalization import BatchNormalization
 from keras.layers.advanced_activations import LeakyReLU
 
-batch_size = 32
-epochs = 100
+batch_size = 64
+epochs = 10
 
 #Add network
 model = Sequential()
-model.add(Dense(20 ,input_shape=(140,), activation='linear'))
+model.add(Dense(100 ,input_shape=(140,), activation='linear'))
+model.add(LeakyReLU(alpha=0.0))
+model.add(Dense(50, activation='linear'))
 model.add(LeakyReLU(alpha=0.0))
 model.add(Dense(10, activation='linear'))
 model.add(LeakyReLU(alpha=0.0))
 model.add(Dense(1, activation='linear'))
 
-model.compile(loss=keras.losses.mean_squared_error, optimizer=keras.optimizers.Adam(),metrics=['accuracy'])
+model.compile(loss=keras.losses.mean_absolute_error, optimizer=keras.optimizers.Adam(lr=0.01),metrics=['accuracy'])
 
 model.summary()
 

@@ -13,7 +13,7 @@ from keras.models import load_model
 model = load_model("model.h5py")
 
 print("test data : ")
-print(train_y[:10])
+print(train_x[:10])
 
 result = model.predict(train_x)
 print("result : ")
