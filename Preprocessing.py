@@ -1,8 +1,15 @@
 import pandas as pd
 from keras.utils import to_categorical
 
+
+month = ['Month_1_1', 'Month_1_2', 'Month_2_1', 'Month_2_2', 'Month_3_1', 'Month_3_2', 'Month_4_1', 'Month_4_2', 'Month_5_1', 'Month_5_2', 'Month_6_1', 'Month_6_2', 'Month_7_1', 'Month_7_2', 'Month_8_1', 'Month_8_2', 'Month_9_1', 'Month_9_2', 'Month_10_1', 'Month_10_2', 'Month_11_1', 'Month_11_2', 'Month_12_1', 'Month_12_2']
+
 def add_month_col(row):
-      return row['Date'][0]
+      if int(row['Date'].split('/')[1]) <= 15:
+            half = '1'
+      else:
+            half = '2'
+      return row['Date'].split('/')[0] + '_' + half
 
 features = pd.read_csv("data/features.csv")
 test = pd.read_csv("data/test.csv")
@@ -25,7 +32,8 @@ merged_test[['CPI','Unemployment']] = merged_test[['CPI','Unemployment']].fillna
 merged_test = merged_test.fillna(0.)
 merged_test = merged_test.drop('Date', 1)
 merged_test = pd.get_dummies(merged_test, columns=['Store', 'Dept', 'Type', 'Month'])
-merged_test['Month_8'] = 0
-merged_test['Month_9'] = 0
+for m in month:
+      if m not in merged_test.index:
+            merged_test[m] = 0
 merged_test.to_csv("data/merged_test.csv", index =False)
 

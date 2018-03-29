@@ -16,13 +16,12 @@ from keras.layers import Dense, Dropout
 from keras.layers.normalization import BatchNormalization
 from keras.layers.advanced_activations import LeakyReLU
 
-batch_size = train_x.shape[0]
-epochs = 10000
+batch_size = 32
+epochs = 150
 
 #Add network
 model = Sequential()
 model.add(Dense(100 ,input_shape=(train_x.shape[1],), activation='linear'))
-model.add(Dense(100, activation='linear'))
 model.add(Dense(100, activation='linear'))
 model.add(Dense(100, activation='linear'))
 model.add(Dense(100, activation='linear'))
@@ -35,3 +34,19 @@ model.summary()
 #Train network
 model_train = model.fit(train_x, train_y, batch_size=batch_size,epochs=epochs,verbose=1,validation_data=(valid_x, valid_y))
 model.save("model.h5py")
+
+accuracy = model_train.history['acc']
+val_accuracy = model_train.history['val_acc']
+loss = model_train.history['loss']
+val_loss = model_train.history['val_loss']
+epochs = range(len(accuracy))
+plt.subplot(epochs, accuracy, 'bo', label='Training accuracy')
+plt.subplot(epochs, val_accuracy, 'b', label='Validation accuracy')
+plt.title('Training and validation accuracy')
+plt.legend()
+plt.figure()
+plt.plot(epochs, loss, 'bo', label='Training loss')
+plt.plot(epochs, val_loss, 'b', label='Validation loss')
+plt.title('Training and validation loss')
+plt.legend()
+plt.show()
