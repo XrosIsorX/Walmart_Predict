@@ -13,14 +13,16 @@ from keras.models import load_model
 model = load_model("model_2x100_7941.h5py")
 
 print("train data : ")
-print(train_x[:10])
+print(train_y[:10])
 
-result = model.predict(train_x)
+train_result = model.predict(train_x)
 print("train result : ")
-print(result[:10])
+print(train_result[:10])
+
+test_result = model.predict(test_x)
 
 submission = pd.read_csv("data/sampleSubmission.csv")
-submission['Weekly_Sales'] = np.array(result)
+submission['Weekly_Sales'] = np.array(1.5*test_result)
 
 submission.to_csv("data/submission.csv", index =False)
 
