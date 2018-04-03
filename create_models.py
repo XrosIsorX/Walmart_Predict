@@ -17,19 +17,30 @@ from keras.layers.normalization import BatchNormalization
 from keras.layers.advanced_activations import LeakyReLU
 
 batch_size = 32
-epochs = 150
+epochs = 30
 
 #Add network
 model = Sequential()
 model.add(Dense(100 ,input_shape=(train_x.shape[1],), activation='linear'))
+model.add(Dropout(0.2))
 model.add(Dense(100, activation='linear'))
+model.add(Dropout(0.2))
 model.add(Dense(100, activation='linear'))
-model.add(Dense(100, activation='linear'))
+model.add(Dropout(0.2))
 model.add(Dense(1, activation='linear'))
 
 model.compile(loss=keras.losses.mean_absolute_error, optimizer=keras.optimizers.Adam(),metrics=['accuracy'])
 
 model.summary()
+
+from keras.models import load_model
+
+model = load_model("model.h5py")
+
+train_x = np.array(train_x)
+train_y = np.array(train_y)
+valid_x = np.array(valid_x)
+valid_y = np.array(valid_y)
 
 #Train network
 model_train = model.fit(train_x, train_y, batch_size=batch_size,epochs=epochs,verbose=1,validation_data=(valid_x, valid_y))
