@@ -1,5 +1,5 @@
 import numpy as np
-import matplotlib as plt
+import matplotlib.pyplot as plt
 import pandas as pd
 
 data = pd.read_csv("data/merged_train.csv")
@@ -35,7 +35,7 @@ model.summary()
 
 from keras.models import load_model
 
-model = load_model("model.h5py")
+model = load_model("models/model.h5py")
 
 train_x = np.array(train_x)
 train_y = np.array(train_y)
