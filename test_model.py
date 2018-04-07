@@ -10,7 +10,7 @@ train_x = data.drop('Weekly_Sales', 1)
 
 from keras.models import load_model
 
-model = load_model("model.h5py")
+model = load_model("models/model.h5py")
 
 print("train data : ")
 print(train_y[:10])

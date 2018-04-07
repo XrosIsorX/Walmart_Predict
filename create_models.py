@@ -44,7 +44,7 @@ valid_y = np.array(valid_y)
 
 #Train network
 model_train = model.fit(train_x, train_y, batch_size=batch_size,epochs=epochs,verbose=1,validation_data=(valid_x, valid_y))
-model.save("model.h5py")
+model.save("models/model.h5py")
 
 accuracy = model_train.history['acc']
 val_accuracy = model_train.history['val_acc']
