@@ -4,13 +4,13 @@ import pandas as pd
 
 train = pd.read_csv("data/train.csv")
 
-for s in train['Store'].unique():
+for s in range(1,2):
       data = pd.read_csv("data/merged_train_split_store_" + str(s) + ".csv")
       train_y = data['Weekly_Sales']
       train_x = data.drop('Weekly_Sales', 1)
        
       from sklearn.model_selection import train_test_split
-      train_x, valid_x, train_y, valid_y = train_test_split(train_x, train_y, test_size=0.1, random_state=14)
+      train_x, valid_x, train_y, valid_y = train_test_split(train_x, train_y, test_size=0.1, random_state=500)
       
       import keras 
       from keras.models import Sequential, Input, Model
@@ -19,7 +19,7 @@ for s in train['Store'].unique():
       from keras.layers.advanced_activations import LeakyReLU
       
       batch_size = 32
-      epochs = 30
+      epochs = 100
       
       
       #Add network

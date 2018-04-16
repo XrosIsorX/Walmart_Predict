@@ -1,3 +1,4 @@
 */merged_test*.csv
 */merged_train*.csv
 */submission*.csv
+*.pkl

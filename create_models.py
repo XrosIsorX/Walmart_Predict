@@ -8,7 +8,7 @@ train_x = data.drop('Weekly_Sales', 1)
 
 
 from sklearn.model_selection import train_test_split
-train_x, valid_x, train_y, valid_y = train_test_split(train_x, train_y, test_size=0.1, random_state=14)
+train_x, valid_x, train_y, valid_y = train_test_split(train_x, train_y, test_size=0.1, random_state=20)
 
 import keras 
 from keras.models import Sequential, Input, Model
@@ -21,11 +21,11 @@ epochs = 30
 
 #Add network
 model = Sequential()
-model.add(Dense(100 ,input_shape=(train_x.shape[1],), activation='linear'))
+model.add(Dense(200 ,input_shape=(train_x.shape[1],), activation='linear'))
 model.add(Dropout(0.2))
 model.add(Dense(100, activation='linear'))
 model.add(Dropout(0.2))
-model.add(Dense(100, activation='linear'))
+model.add(Dense(50, activation='linear'))
 model.add(Dropout(0.2))
 model.add(Dense(1, activation='linear'))
 
@@ -33,9 +33,9 @@ model.compile(loss=keras.losses.mean_absolute_error, optimizer=keras.optimizers.
 
 model.summary()
 
-from keras.models import load_model
+#from keras.models import load_model
 
-model = load_model("models/model.h5py")
+#model = load_model("models/model.h5py")
 
 train_x = np.array(train_x)
 train_y = np.array(train_y)
